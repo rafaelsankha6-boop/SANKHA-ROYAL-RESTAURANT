@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Restaurant System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 🔐 LOGIN -->
+<div id="loginSection" class="section active">
+  <h2>Admin Login</h2>
+
+  <input id="loginUser" placeholder="Username">
+  <input id="loginPass" type="password" placeholder="Password">
+
+  <button onclick="login()">Login</button>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+
+<header>
+  <h2>SANKHA RESTAURANT SYSTEM</h2>
+  <button onclick="logout()">Logout</button>
+</header>
+
+<nav>
+  <button onclick="show('menu')">Menu</button>
+  <button onclick="show('cart')">Cart</button>
+  <button onclick="show('admin')">Admin</button>
+  <button onclick="show('orders')">Orders</button>
+</nav>
+
+<!-- MENU -->
+<div id="menuSection" class="section">
+  <div id="menu"></div>
+</div>
+
+<!-- CART -->
+<div id="cartSection" class="section">
+  <h2>Cart</h2>
+  <div id="cart"></div>
+  <h3>Total: <span id="total">0</span></h3>
+  <button onclick="checkout()">Checkout</button>
+</div>
+
+<!-- ADMIN -->
+<div id="adminSection" class="section">
+  <h2>Admin Panel</h2>
+
+  <input id="name" placeholder="Food name">
+  <input id="price" placeholder="Price">
+  <input id="image" placeholder="Image URL">
+
+  <select id="category">
+    <option>Breakfast</option>
+    <option>Lunch</option>
+    <option>Dinner</option>
+  </select>
+
+  <button onclick="saveFood()">Save Food</button>
+</div>
+
+<!-- ORDERS -->
+<div id="ordersSection" class="section">
+  <h2>Orders</h2>
+  <div id="orders"></div>
+</div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

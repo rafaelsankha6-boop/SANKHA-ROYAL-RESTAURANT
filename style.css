@@ -1,0 +1,220 @@
+/* ================= BASE ================= */
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0f0f0f;
+  color:white;
+  padding-top:80px;
+}
+
+/* ================= SECTIONS ================= */
+.section{
+  display:none;
+  padding:20px;
+}
+
+.section.active{
+  display:block;
+}
+
+/* ================= LOGIN ================= */
+#loginSection{
+  text-align:center;
+  margin-top:120px;
+}
+
+#loginSection input{
+  display:block;
+  margin:10px auto;
+  padding:10px;
+  width:250px;
+  border-radius:8px;
+  border:none;
+  transition:0.3s;
+}
+
+#loginSection input:focus{
+  outline:none;
+  box-shadow:0 0 10px rgba(229,9,20,0.6);
+  transform:scale(1.03);
+}
+
+/* ================= HEADER (MOVING TEXT 🔥) ================= */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:#111;
+  padding:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  overflow:hidden;
+  z-index:999;
+  border-bottom:1px solid #222;
+}
+
+header h2{
+  white-space:nowrap;
+  display:inline-block;
+  font-size:18px;
+  animation:moveText 10s linear infinite;
+}
+
+/* moving animation */
+@keyframes moveText{
+  0%{transform:translateX(100%);}
+  100%{transform:translateX(-100%);}
+}
+
+/* pause on hover */
+header:hover h2{
+  animation-play-state:paused;
+}
+
+/* ================= NAV ================= */
+nav{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  background:#222;
+  padding:10px;
+  position:sticky;
+  top:60px;
+  z-index:998;
+}
+
+/* NAV BUTTONS ================= */
+nav button{
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  background:#333;
+  color:white;
+  transition:0.3s;
+  font-weight:bold;
+}
+
+nav button:hover{
+  background:#e50914;
+  transform:scale(1.1);
+  box-shadow:0 5px 15px rgba(229,9,20,0.4);
+}
+
+/* ================= MENU GRID ================= */
+#menu{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+
+/* ================= CARD DESIGN ================= */
+.card{
+  background:#1c1c1c;
+  padding:10px;
+  border-radius:12px;
+  transition:0.3s;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  border:1px solid #222;
+}
+
+.card:hover{
+  transform:scale(1.05);
+  box-shadow:0 15px 30px rgba(255,0,0,0.25);
+}
+
+/* IMAGE ZOOM */
+.card img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  border-radius:10px;
+  transition:0.3s;
+}
+
+.card:hover img{
+  transform:scale(1.1);
+}
+
+/* ================= BUTTONS ================= */
+button{
+  margin:5px;
+  padding:8px 10px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.3s;
+  font-weight:bold;
+}
+
+/* hover effect */
+button:hover{
+  transform:scale(1.05);
+  filter:brightness(1.1);
+}
+
+/* active click */
+button:active{
+  transform:scale(0.95);
+}
+
+/* special buttons */
+.add{background:#28a745;color:white;}
+.edit{background:#007bff;color:white;}
+.del{background:#e50914;color:white;}
+
+/* ================= CART ================= */
+#cart p{
+  background:#1c1c1c;
+  padding:10px;
+  margin:5px 0;
+  border-radius:8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  transition:0.3s;
+}
+
+#cart p:hover{
+  transform:scale(1.02);
+  box-shadow:0 5px 15px rgba(0,0,0,0.4);
+}
+
+/* ================= ORDERS ================= */
+.order{
+  background:#1c1c1c;
+  padding:10px;
+  margin:10px 0;
+  border-radius:10px;
+  border-left:4px solid #e50914;
+  transition:0.3s;
+}
+
+.order:hover{
+  transform:scale(1.02);
+  box-shadow:0 10px 20px rgba(255,0,0,0.2);
+}
+
+/* ================= INPUTS ================= */
+input,select{
+  padding:10px;
+  margin:5px;
+  width:220px;
+  border-radius:8px;
+  border:none;
+  transition:0.3s;
+}
+
+/* hover effect */
+input:hover,select:hover{
+  transform:scale(1.03);
+}
+
+/* focus effect */
+input:focus,select:focus{
+  outline:none;
+  box-shadow:0 0 10px rgba(229,9,20,0.6);
+}
