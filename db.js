@@ -1,29 +1,36 @@
 const mysql = require("mysql2");
 
+/* ================= CREATE POOL ================= */
 const db = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "",
+  database: process.env.DB_NAME || "test",
   port: process.env.DB_PORT || 3306,
 
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
 
-  ssl: {
-    rejectUnauthorized: false
-  }
+  // SSL only if enabled in production
+  ssl: process.env.DB_SSL === "true"
+    ? { rejectUnauthorized: false }
+    : false
 });
 
-// test connection
-db.getConnection((err, connection) => {
+/* ================= TEST CONNECTION ================= */
+db.query("SELECT 1", (err) => {
   if (err) {
-    console.log("❌ DB CONNECTION ERROR:", err.message);
+    console.log("❌ Database Connection Failed:", err.message);
   } else {
-    console.log("✅ Cloud MySQL Connected Successfully");
-    connection.release();
+    console.log("✅ MySQL Connected Successfully");
   }
 });
 
+/* ================= ERROR HANDLER ================= */
+db.on("error", (err) => {
+  console.log("❌ MySQL Pool Error:", err.message);
+});
+
+/* ================= EXPORT ================= */
 module.exports = db;
