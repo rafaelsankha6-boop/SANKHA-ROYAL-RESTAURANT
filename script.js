@@ -1,5 +1,5 @@
 /* ================= CONFIG ================= */
-const API = "http://localhost:5000"; // 🔥 change after deployment
+const API = "https://your-backend-url.onrender.com"; // ✅ production
 
 /* ================= STATE ================= */
 let menu = [];
