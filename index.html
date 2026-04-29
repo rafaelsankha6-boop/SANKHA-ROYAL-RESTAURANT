@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Restaurant System</title>
 <link rel="stylesheet" href="style.css">
 </head>
@@ -18,8 +19,8 @@
   <button onclick="login()">Login</button>
 </div>
 
-<!-- MAIN APP -->
-<div id="app">
+<!-- MAIN APP (hidden by default) -->
+<div id="app" style="display:none;">
 
 <header>
   <h2>SANKHA RESTAURANT SYSTEM</h2>
@@ -51,13 +52,15 @@
   <h2>Admin Panel</h2>
 
   <input id="name" placeholder="Food name">
-  <input id="price" placeholder="Price">
+
+  <input id="price" type="number" placeholder="Price">
+
   <input id="image" placeholder="Image URL">
 
   <select id="category">
-    <option>Breakfast</option>
-    <option>Lunch</option>
-    <option>Dinner</option>
+    <option value="Breakfast">Breakfast</option>
+    <option value="Lunch">Lunch</option>
+    <option value="Dinner">Dinner</option>
   </select>
 
   <button onclick="saveFood()">Save Food</button>
