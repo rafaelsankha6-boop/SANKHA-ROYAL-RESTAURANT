@@ -1,36 +1,49 @@
-const mysql = require("mysql2");
+const mysql = require("mysql2/promise");
+require("dotenv").config();
 
-/* ================= CREATE POOL ================= */
-const db = mysql.createPool({
-  host: process.env.DB_HOST || "localhost",
-  user: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD || "",
-  database: process.env.DB_NAME || "test",
-  port: process.env.DB_PORT || 3306,
+/* ================= CREATE CONNECTION POOL ================= */
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: Number(process.env.DB_PORT) || 3306,
 
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
 
-  // SSL only if enabled in production
-  ssl: process.env.DB_SSL === "true"
-    ? { rejectUnauthorized: false }
-    : false
+  ssl:
+    process.env.DB_SSL === "true"
+      ? { rejectUnauthorized: false }
+      : undefined
 });
 
 /* ================= TEST CONNECTION ================= */
-db.query("SELECT 1", (err) => {
-  if (err) {
-    console.log("❌ Database Connection Failed:", err.message);
-  } else {
+(async () => {
+  try {
+    const conn = await pool.getConnection();
     console.log("✅ MySQL Connected Successfully");
+    conn.release();
+  } catch (err) {
+    console.error("❌ Database Connection Failed:", err.message);
+    process.exit(1);
   }
-});
+})();
 
-/* ================= ERROR HANDLER ================= */
-db.on("error", (err) => {
-  console.log("❌ MySQL Pool Error:", err.message);
-});
+/* ================= QUERY HELPER ================= */
+async function query(sql, params = []) {
+  try {
+    const [results] = await pool.execute(sql, params);
+    return results;
+  } catch (err) {
+    console.error("❌ SQL Error:", err.message);
+    throw err;
+  }
+}
 
 /* ================= EXPORT ================= */
-module.exports = db;
+module.exports = {
+  query,
+  pool
+};
